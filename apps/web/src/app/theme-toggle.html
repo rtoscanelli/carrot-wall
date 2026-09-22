@@ -1,0 +1,9 @@
+<button
+  type="button"
+  class="theme-toggle"
+  [attr.aria-label]="theme() === 'dark' ? 'Mudar para modo claro' : 'Mudar para modo escuro'"
+  [title]="theme() === 'dark' ? 'Mudar para modo claro' : 'Mudar para modo escuro'"
+  (click)="toggle()"
+>
+  {{ theme() === 'dark' ? '🌙' : '☀️' }}
+</button>

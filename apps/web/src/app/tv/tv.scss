@@ -58,3 +58,19 @@
   display: block;
   shape-rendering: crispEdges;
 }
+
+// Dark mode (docs/specs/09-dark-mode.md): /tv has no toggle of its own — it silently follows
+// whichever theme this browser has stored (set once on the projector laptop via `/` or
+// `/admin`). `:host`'s own --wall-* declarations above take precedence over anything set at
+// :root, so the dark values have to be redeclared here too, or /tv would stay light regardless
+// of the stored preference. Same DESIGN.md dark family as styles.scss's :root[data-theme='dark']
+// block; --tv-qr-bg/--tv-qr-fg and --tv-font-display are unaffected — the QR tile is already the
+// one deliberate dark surface on this screen in either theme.
+:host-context([data-theme='dark']) {
+  --wall-bg: #181715;
+  --wall-surface: #252320;
+  --wall-ink: #faf9f5;
+  --wall-muted: #a09d96;
+  --wall-hairline: #1f1e1b;
+  --wall-accent: #cc785c;
+}
