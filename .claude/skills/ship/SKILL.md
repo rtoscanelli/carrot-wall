@@ -1,8 +1,15 @@
 ---
-description: Push the current worktree's branch, open a PR stacked on its predecessor (or main if merged), verify it, then hand off to /cleanup-worktree
-argument-hint: [optional: base branch to use instead of auto-detecting]
+name: ship
+description: Push the current branch and open a PR stacked on its predecessor slice.
+argument-hint: [optional base branch]
 disable-model-invocation: true
+allowed-tools: Bash(git status *) Bash(git branch *) Bash(git push *) Bash(gh pr *) Bash(gh repo *)
 ---
+Current state:
+!`git branch --show-current`
+!`git status --short`
+
+(the shipped body continues below)
 Ship the current worktree: $ARGUMENTS
 
 This repo stacks slice branches on each other rather than always targeting `master` — see
