@@ -21,6 +21,20 @@
   --wall-font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
+// Dark mode (docs/specs/09-dark-mode.md): a personal preference, opted into via ThemeService's
+// `data-theme` attribute on <html>, never the default. Values are DESIGN.md's existing dark
+// family — no new hex invented except reusing `surface-dark-soft` as the hairline, which sits
+// between `--wall-bg` and `--wall-surface` the same way the light hairline sits between them,
+// so card borders stay visible against their own fill (see spec's Constraints).
+:root[data-theme='dark'] {
+  --wall-bg: #181715; // surface-dark
+  --wall-surface: #252320; // surface-dark-elevated
+  --wall-ink: #faf9f5; // on-dark
+  --wall-muted: #a09d96; // on-dark-soft
+  --wall-hairline: #1f1e1b; // surface-dark-soft, repurposed
+  --wall-accent: #cc785c; // primary (same value /tv already uses)
+}
+
 html {
   height: 100%;
   @include mat.theme(
@@ -36,8 +50,9 @@ html {
 }
 
 body {
-  // The app commits to one look (§4: warm, editorial, calm) rather than following the
-  // viewer's system theme.
+  // The app commits to one look by default (§4: warm, editorial, calm) rather than following
+  // the viewer's system theme — dark is opted into per browser via the toggle, never inferred
+  // from `prefers-color-scheme` (docs/specs/09-dark-mode.md).
   color-scheme: light;
 
   background-color: var(--wall-bg);
@@ -48,4 +63,11 @@ body {
   // Reset the user agent margin.
   margin: 0;
   height: 100%;
+}
+
+// Higher specificity than `body`'s own `color-scheme: light` above (attribute selector + type
+// vs. type alone), so native form controls (the /post textarea, the /admin PIN input) render
+// with dark chrome once the attribute is set.
+:root[data-theme='dark'] body {
+  color-scheme: dark;
 }

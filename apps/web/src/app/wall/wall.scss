@@ -10,6 +10,14 @@
   padding: 1.5rem 1rem;
   margin-bottom: 1.5rem;
   border-bottom: 1px solid var(--wall-hairline);
+
+  // The shared theme toggle (theme-toggle.scss) is fixed top-right. At narrow widths the
+  // centered prompt text spans close enough to the edge to sit under it — confirmed via a
+  // Playwright bounding-box check during docs/specs/09-dark-mode-plan.md's manual pass. Extra
+  // top clearance below ~400px keeps them apart without moving anything on wider screens.
+  @media (max-width: 400px) {
+    padding-top: 3.25rem;
+  }
 }
 
 .wall-prompt__text {
