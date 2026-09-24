@@ -5,8 +5,14 @@ description: Capture the problem before any solution. Use when a ticket, idea or
 argument-hint: [the ticket, idea or problem in one or two sentences]
 model: opus
 effort: xhigh
+allowed-tools: Bash(gh issue view *)
 ---
 Someone wants this: $ARGUMENTS
+
+If $ARGUMENTS is an issue number, run `gh issue view $ARGUMENTS --comments`
+first. Treat the issue as the originator's own words: quote them, do not
+rewrite them. Anything the issue does not say goes under Open questions.
+Never comment on the issue or change it.
 
 Interview me, one question at a time, until you can fill these five headings
 honestly: Problem · Proposed outcome · Affected users and systems · Constraints ·

@@ -18,7 +18,8 @@
           {
             "type": "command",
             "command": "f=$(python3 -c 'import json,sys;print(json.load(sys.stdin).get(\"tool_input\",{}).get(\"file_path\",\"\"))'); case \"$f\" in */db/migration/V*) if [ -e \"$f\" ]; then echo 'Existing migrations are immutable. Create a new versioned file instead.' >&2; exit 2; fi;; esac"
-          }
+          },
+          { "type": "command", "command": "\"${CLAUDE_PROJECT_DIR}\"/.claude/hooks/no-merge.sh" }
         ]
       },
       {
@@ -38,6 +39,13 @@
             "command": ".claude/hooks/block_secrets_access.sh"
           }
         ]
+      },
+      {
+        "permissions": {
+          "allow": ["Bash(gh issue view *)", "Bash(gh issue list *)"],
+          "ask":   ["Bash(gh issue comment *)", "Bash(gh issue edit *)"],
+          "deny":  ["Bash(gh issue close *)"]
+        }
       }
     ]
   }
